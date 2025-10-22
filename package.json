@@ -1,8 +1,9 @@
 {
   "name": "hiworks-checkin",
-  "version": "1.0.0",
-  "description": "하이웍스 자동 출근 체크인 스크립트",
+  "version": "2.0.0",
+  "description": "하이웍스 자동 출근 체크인 스크립트 (HTTP API 기반)",
   "main": "hiworks-checkin.js",
+  "type": "module",
   "scripts": {
     "start": "node hiworks-checkin.js",
     "checkin": "node hiworks-checkin.js",
@@ -11,12 +12,12 @@
   "keywords": [
     "hiworks",
     "automation",
-    "checkin"
+    "checkin",
+    "api"
   ],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^16.4.5",
-    "puppeteer": "^23.0.0"
+    "dotenv": "^16.4.5"
   }
 }
