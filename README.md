@@ -1,33 +1,43 @@
-# 하이웍스 자동 출근 체크인 (Playwright)
+# 하이웍스 자동 출근 체크인 (Playwright Python)
 
-하이웍스 출근 체크인을 자동화하는 Playwright 기반 스크립트입니다.
+하이웍스 출근 체크인을 자동화하는 Playwright Python 기반 스크립트입니다.
 
-## 주요 변경사항 (Puppeteer → Playwright)
+## 주요 변경사항
 
-이 프로젝트는 Puppeteer에서 Playwright로 완전히 마이그레이션되었습니다.
+### Node.js → Python 마이그레이션
+이 프로젝트는 Node.js에서 Python으로 완전히 마이그레이션되었습니다.
+Android 환경에서도 동작할 수 있도록 Python 기반으로 변경되었습니다.
 
-### Playwright 장점
+### Playwright Python 장점
 - 더 빠른 실행 속도
 - 더 안정적인 요소 선택 (Auto-waiting)
 - 강력한 디버깅 도구
 - 여러 브라우저 지원 (Chromium, Firefox, WebKit)
-- 더 나은 테스트 리포트
+- Python 생태계 활용 가능
+- Android 디바이스 연동 지원
 
-### 주요 코드 변경사항
-- `puppeteer` → `playwright` 라이브러리 사용
-- `page.locator()` → `page.getByLabel()`, `page.getByRole()` 등 더 의미있는 셀렉터 사용
-- `page.waitForNavigation()` → `page.waitForLoadState('networkidle')` 사용
-- Browser Context 패턴으로 더 나은 격리 환경 제공
+## 요구사항
+
+- Python 3.8 이상
 
 ## 설치
 
+### 1. Python 가상환경 생성 (권장)
 ```bash
-npm install
+python3 -m venv venv
+source venv/bin/activate  # macOS/Linux
+# 또는
+venv\Scripts\activate  # Windows
 ```
 
-Playwright 브라우저 설치:
+### 2. 필요한 패키지 설치
 ```bash
-npx playwright install
+pip install -r requirements.txt
+```
+
+### 3. Playwright 브라우저 설치
+```bash
+playwright install chromium
 ```
 
 ## 환경 설정
@@ -50,15 +60,18 @@ DEBUG=false
 
 ### 일반 실행
 ```bash
-npm start
-# 또는
-npm run checkin
+python3 hiworks_checkin.py
 ```
 
 ### 디버그 모드 실행
 디버그 모드에서는 브라우저가 보이고, 각 단계별 스크린샷이 저장됩니다:
 ```bash
-npm run debug
+DEBUG=true python3 hiworks_checkin.py
+```
+
+또는 `.env` 파일에서 `DEBUG=true`로 설정 후:
+```bash
+python3 hiworks_checkin.py
 ```
 
 ## 스크립트 동작 방식
@@ -79,31 +92,47 @@ npm run debug
 - 스크린샷 자동 저장 (`screenshot-*.png`)
 - 에러 발생 시 스크린샷 저장
 
-## Playwright 설정
+## 자동화 설정 (Cron)
 
-`playwright.config.js` 파일에서 다양한 설정을 변경할 수 있습니다:
-- 타임아웃 설정
-- 스크린샷/비디오 옵션
-- 테스트 브라우저 선택 (Chromium, Firefox, WebKit)
-- 리포트 형식
+매일 특정 시간에 자동으로 출근 체크인하려면 crontab을 설정하세요:
+
+```bash
+# crontab 편집
+crontab -e
+
+# 매일 오전 9시에 실행 (예시)
+0 9 * * * cd /path/to/hiworks-checkin && /path/to/venv/bin/python3 hiworks_checkin.py >> /path/to/logs/checkin.log 2>&1
+```
 
 ## 문제 해결
 
+### Python 버전 확인
+```bash
+python3 --version  # 3.8 이상이어야 함
+```
+
 ### 브라우저가 실행되지 않을 때
 ```bash
-npx playwright install
+playwright install chromium
 ```
 
 ### 요소를 찾을 수 없을 때
 디버그 모드로 실행하여 스크린샷을 확인하세요:
 ```bash
-npm run debug
+DEBUG=true python3 hiworks_checkin.py
 ```
 
 ### 로그인 실패
 1. `.env` 파일의 계정 정보 확인
 2. 하이웍스 로그인 페이지 구조 변경 여부 확인
 3. 디버그 모드로 실행하여 어느 단계에서 실패하는지 확인
+
+### 패키지 설치 오류
+가상환경을 사용하고 pip를 업그레이드하세요:
+```bash
+python3 -m pip install --upgrade pip
+pip install -r requirements.txt
+```
 
 ## 라이선스
 

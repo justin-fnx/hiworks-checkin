@@ -1,7 +1,21 @@
+# Environment
 .env
-node_modules/
+
+# Screenshots
 screenshot-*.png
-test-results/
-playwright-report/
-playwright/.cache/
+
+# Claude
 .claude
+
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
