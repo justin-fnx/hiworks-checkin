@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="check_in"
+        android:enabled="true"
+        android:icon="@android:drawable/ic_menu_today"
+        android:shortcutShortLabel="@string/shortcut_check_in_short"
+        android:shortcutLongLabel="@string/shortcut_check_in_long">
+        <intent
+            android:action="com.hiworks.checkin.ACTION_CHECK_IN"
+            android:targetPackage="com.hiworks.checkin"
+            android:targetClass="com.hiworks.checkin.MainActivity" />
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+</shortcuts>

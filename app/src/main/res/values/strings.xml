@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">하이웍스 출근체크</string>
+    <string name="shortcut_check_in_short">출근체크</string>
+    <string name="shortcut_check_in_long">하이웍스 출근체크</string>
+</resources>
