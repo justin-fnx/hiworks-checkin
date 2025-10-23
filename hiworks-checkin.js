@@ -183,7 +183,7 @@ const checkIn = async (cookieJar) => {
         }
     }, postData);
 
-    if (response.statusCode !== 200) {
+    if (response.statusCode / 100 !== 2) {
         const errorData = response.json();
         throw new Error(`출근 체크 실패: ${response.statusCode} - ${errorData?.errors?.message || response.body}`);
     }
